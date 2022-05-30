@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import { useAtom } from "jotai";
-import React,{useEffect} from "react";
+import React, { useEffect, useRef } from "react";
 import { openHomeVideo } from "../../../../base/atom/useAtom";
 import Container from "../../../../Layout/Container";
 import BodyHeaders from "../../../Global/Elements/BodyHeaders/BodyHeaders";
@@ -13,16 +13,12 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 function ResumeSection() {
-  const [play,setPlay] = useAtom(openHomeVideo)
+  const [play, setPlay] = useAtom(openHomeVideo);
 
-  const openVideo: any = () : void => (
-    setPlay(true)
-  )
-
+  const openVideo: any = (): void => setPlay(true);
+  let reseumeTutorila = useRef(null)
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
     gsap.to(".resumeHeader", {
       scrollTrigger: {
         trigger: ".resumeHeader",
@@ -39,29 +35,30 @@ function ResumeSection() {
       scrollTrigger: {
         trigger: ".resumeVideo",
         toggleActions: "restart restart none reverse",
-        start: "20px 90%"
+        start: "20px 90%",
       },
       opacity: 1,
       duration: 1.5,
       ease: "easeIn",
     });
 
-    gsap.to(".resumtTutorial", {
-      scrollTrigger: {
-        trigger: ".resumtTutorial",
-        toggleActions: "restart restart none reverse",
-        start: "20px 80%",
-      },
-      opacity: 1,
-      x: -20,
-      duration: 1.5,
-      ease: "easeIn",
-    });
+     gsap.fromTo(
+       reseumeTutorila.current,
+       { x: -100, duration: 1.4, opacity: 0 },
+       {
+         x: 0,
+         duration: 1.5,
+         opacity: 1,
+         scrollTrigger: {
+           trigger: reseumeTutorila.current,
+           toggleActions: "play none none reverse",
+           start: "20px 90%",
+         },
+       }
+     );
 
-    let tl = gsap.timeline({default: {opacity: 1}});
 
-    
-
+    let tl = gsap.timeline({ default: { opacity: 1 } });
 
     tl.fromTo(
       ".resumeBounce",
@@ -80,10 +77,8 @@ function ResumeSection() {
         yoyo: true,
       }
     );
-
-
   }, []);
-  
+
   return (
     <section className="mt-44 relative">
       <Container>
@@ -127,7 +122,10 @@ function ResumeSection() {
             </div>
           </div>
 
-          <div className="lg:pl-12 space-y-12 mt-20 lg:resumtTutorial relative lg:translate-x-20">
+          <div
+            ref={reseumeTutorila}
+            className="lg:pl-12 space-y-12 mt-20 l relative "
+          >
             <h3 className="text-2xl md:text-4xl font-light text-textColor ">
               Make your own resume vdeo resume in 3 easy steps.
             </h3>

@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useRef} from "react";
 import BodyHeaders from "../../../Global/Elements/BodyHeaders/BodyHeaders";
 import "@splidejs/react-splide/css";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
@@ -10,6 +10,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 function ClientsReview() {
+  let clientReviewSlider = useRef(null)
 
   useEffect(() => {
      gsap.to(".clientHeader", {
@@ -35,6 +36,23 @@ function ClientsReview() {
         ease: "easeIn",
         x: 0,
       });
+
+      gsap.fromTo(
+      clientReviewSlider.current,
+      { x: -300, duration: 1.4, opacity: 0 },
+      {
+        x: 0,
+        duration: 1.5,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: clientReviewSlider.current,
+          toggleActions: "play none none reverse",
+          start: "20px 90%",
+        },
+      }
+    );
+
+
     
   }, [])
 
@@ -70,8 +88,9 @@ function ClientsReview() {
               <div
                 className="custom-wrapper 
                py-12"
+                ref={clientReviewSlider}
               >
-                <SplideTrack className="clientSlider lg:translate-x-56">
+                <SplideTrack>
                   <SplideSlide>
                     <ReviewCard />
                   </SplideSlide>

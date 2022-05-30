@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Container from "../../../../Layout/Container";
 import DropdownIcon from "../../../Global/Icons/DropdownIcon";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
@@ -10,18 +10,26 @@ import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger);
 function FaqSection() {
 
+  let faqSlider = useRef(null);
+
   useEffect(() => {
-    gsap.to(".faq", {
-      scrollTrigger: {
-        trigger: ".faq",
-        toggleActions: "restart restart none reverse",
-        start: "20px 90%",
-      },
-      opacity: 1,
-      duration: 1.5,
-      ease: "easeIn",
-      x: 0,
-    });
+
+      gsap.fromTo(
+      faqSlider.current,
+      { x: 0, duration: 1.4, opacity: 0 },
+      {
+        x: -170,
+        duration: 1.5,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: faqSlider.current,
+          toggleActions: "play none none reverse",
+          start: "20px 90%",
+        },
+      }
+    );
+
+    
   }, [])
 
   return (
@@ -56,9 +64,9 @@ function FaqSection() {
               hasTrack={false}
               aria-labelledby="My Favorite Images"
             >
-              <div className="custom-wrapper py-12">
+              <div className="custom-wrapper py-12" ref={faqSlider}>
                 <SplideTrack>
-                  <SplideSlide className="lg:translate-x-44 faq opacity-0">
+                  <SplideSlide className="lg:translate-x-44 ">
                     <div className="mt-12 space-y-4">
                       <div className="border-b overflow-hidden pb-3">
                         <input

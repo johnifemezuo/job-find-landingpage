@@ -38,17 +38,16 @@ function CandidateSection() {
           trigger: candidateSlider.current,
           toggleActions: "play none none reverse",
           start: "20px 90%",
-          markers: true,
         },
       }
     );
 
-    ScrollTrigger.create({
-      trigger: candidateSlider.current,
-      toggleActions: "none none none reverse",
-      start: "20px 90%",
-      markers: true,
-    });
+    // ScrollTrigger.create({
+    //   trigger: candidateSlider.current,
+    //   toggleActions: "none none none reverse",
+    //   start: "20px 90%",
+    //   markers: true,
+    // });
 
     // gsap.to(candidateSlider, {
     //   scrollTrigger: {
