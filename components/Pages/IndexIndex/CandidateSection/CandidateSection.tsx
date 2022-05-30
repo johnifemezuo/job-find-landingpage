@@ -12,7 +12,6 @@ import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger);
 
 function CandidateSection() {
-
   let candidateSlider = useRef(null);
 
   useEffect(() => {
@@ -30,7 +29,7 @@ function CandidateSection() {
 
     gsap.fromTo(
       candidateSlider.current,
-      { x: -200, duration: 1.5, opacity: 0 },
+      { x: -200, duration: 1.4, opacity: 0 },
       {
         x: 0,
         duration: 1.5,
@@ -48,7 +47,7 @@ function CandidateSection() {
       trigger: candidateSlider.current,
       toggleActions: "none none none reverse",
       start: "20px 90%",
-      markers: true
+      markers: true,
     });
 
     // gsap.to(candidateSlider, {
