@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Container from "../../../../Layout/Container";
 import BodyHeaders from "../../../Global/Elements/BodyHeaders/BodyHeaders";
 import "@splidejs/react-splide/css";
@@ -11,33 +11,45 @@ import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
 function CandidateSection() {
+  let candidateSlider = useRef(null);
 
   useEffect(() => {
-     gsap.to(".candidateHeader", {
-       scrollTrigger: {
-         trigger: ".candidateHeader",
-         toggleActions: "restart none none reverse",
-         start: "20px 90%",
-       },
-       opacity: 1,
-       duration: 1.5,
-       ease: "easeIn",
-       y: -80
-     });
-    
-      gsap.to(".candidates", {
-        scrollTrigger: {
-          trigger: ".candidates",
-          toggleActions: "restart restart none reverse",
-          start: "20px 90%",
-        },
-        opacity: 1,
-        duration: 1.5,
-        ease: "easeIn",
-        x: 0,
-      });
-    
-  }, [])
+    gsap.to(".candidateHeader", {
+      scrollTrigger: {
+        trigger: ".candidateHeader",
+        toggleActions: "restart none none reverse",
+        start: "20px 90%",
+      },
+      opacity: 1,
+      duration: 1.5,
+      ease: "easeIn",
+      y: -80,
+    });
+
+    gsap.fromTo(
+      candidateSlider.current,
+      { x: -200, duration: 1.5 },
+      { x: 0, duration: 1.5 }
+    );
+
+    ScrollTrigger.create({
+      trigger: candidateSlider.current,
+      toggleActions: "restart restart none reverse",
+      start: "20px 90%",
+    });
+
+    // gsap.to(candidateSlider, {
+    //   scrollTrigger: {
+    //     trigger: el.current,
+    //     toggleActions: "restart restart none reverse",
+    //     start: "20px 90%",
+    //   },
+    //   opacity: 1,
+    //   duration: 1.5,
+    //   ease: "easeIn",
+    //   x: 0,
+    // });
+  }, []);
   return (
     <div className="mt-44">
       <div
@@ -52,7 +64,7 @@ function CandidateSection() {
             desc="Creative people fueled aith passion"
           />
 
-          <div className="my-20 overflow-hidden">
+          <div className="my-20 overflow-hidden" ref={candidateSlider}>
             {/* slider */}
 
             <Splide
@@ -68,14 +80,15 @@ function CandidateSection() {
               aria-labelledby="My Favorite Images"
             >
               <div
-                className="custom-wrapper 
+                className="custom-wrapper  
                py-12"
+                ref={candidateSlider}
               >
                 <div className="splide__progress">
                   <div className="splide__progress__bar bg-red-300" />
                 </div>
 
-                <SplideTrack className="lg:translate-x-44 candidates">
+                <SplideTrack>
                   <SplideSlide>
                     <CandidateCard
                       img="/images/male3.jpg"
