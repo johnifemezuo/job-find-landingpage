@@ -1,12 +1,6 @@
-import gsap, { Power3 } from "gsap";
-import React, { useEffect } from "react";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import React from "react";
 
-gsap.registerPlugin(ScrollTrigger);
-
-function BodyHeaders({ title, subTitle, desc,anime }: any) {
-
-
+function BodyHeaders({ title, subTitle, desc, anime }: any) {
   return (
     <div className={`${anime} text-center space-y-4 mb-7 `}>
       <h4 className="text-primary  text-sm mg:text-base uppercase font-semibold">
@@ -16,7 +10,9 @@ function BodyHeaders({ title, subTitle, desc,anime }: any) {
         {title}
       </h1>
 
-      <p className="max-w-xl px-4 lg:px-0 mx-auto text-zinc-500 lg:text-lg">{desc}</p>
+      <p className="max-w-xl px-4 lg:px-0 mx-auto text-zinc-500 lg:text-lg">
+        {desc}
+      </p>
     </div>
   );
 }
