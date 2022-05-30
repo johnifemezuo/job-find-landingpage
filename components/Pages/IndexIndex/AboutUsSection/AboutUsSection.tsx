@@ -8,9 +8,7 @@ import ValueIcon from "../../../Global/Icons/ValueIcon";
 import AboutUsCard from "./AboutUsCard";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-if (process.client) {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 function AboutUsSection() {
   useEffect(() => {
