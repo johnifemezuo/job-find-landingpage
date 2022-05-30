@@ -10,7 +10,7 @@ import { openNav } from "../../../base/atom/useAtom";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../base/stores/store";
-import { loginUser, logoutUser, logUserName } from "../../Pages/authslices/counterSlice";
+import { loginUser, logUserName } from "../../Pages/authslices/counterSlice";
 
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../../firebase-config";
