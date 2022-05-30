@@ -12,7 +12,7 @@ function LeftIcon() {
       <path
         d="M10 14L3 7.5 10 1"
         stroke="currentColor"
-        stroke-linecap="square"
+        strokeLinecap="square"
       ></path>
     </svg>
   );
