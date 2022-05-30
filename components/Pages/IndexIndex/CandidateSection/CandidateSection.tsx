@@ -10,7 +10,9 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
+
 function CandidateSection() {
+
   let candidateSlider = useRef(null);
 
   useEffect(() => {
@@ -28,14 +30,25 @@ function CandidateSection() {
 
     gsap.fromTo(
       candidateSlider.current,
-      { x: -200, duration: 1.5 },
-      { x: 0, duration: 1.5 }
+      { x: -200, duration: 1.5, opacity: 0 },
+      {
+        x: 0,
+        duration: 1.5,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: candidateSlider.current,
+          toggleActions: "play none none reverse",
+          start: "20px 90%",
+          markers: true,
+        },
+      }
     );
 
     ScrollTrigger.create({
       trigger: candidateSlider.current,
-      toggleActions: "restart restart none reverse",
+      toggleActions: "none none none reverse",
       start: "20px 90%",
+      markers: true
     });
 
     // gsap.to(candidateSlider, {
